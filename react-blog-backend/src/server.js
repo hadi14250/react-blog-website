@@ -1,42 +1,60 @@
 import express from "express";
-
-let articlesInfo = [{
-    name: "learn-react",
-    upvotes: 0,
-    comments: [],
-}, {
-    name: "learn-node",
-    upvotes: 0,
-    comments: [],
-}, {
-    name: "mongodb",
-    upvotes: 0,
-    comments: [],
-},
-];
-
+import { MongoClient } from "mongodb";
 const app = express();
 app.use(express.json());
 
-app.put("/api/articles/:name/upvote", (req, res) => {
+app.get("/api/articles/:name", async (req, res) => {
     const { name } = req.params;
-    const article = articlesInfo.find(a => a.name === name);
+
+    const client = new MongoClient("mongodb://127.0.0.1:27017");
+    await client.connect();
+
+     const db = client.db("react-blog-db");
+
+     const article = await db.collection("articles").findOne( { name } );
+
+     if (article) {
+         res.json(article);
+     } else {
+        res.sendStatus(404);
+     }
+});
+
+app.put("/api/articles/:name/upvote", async (req, res) => {
+    const { name } = req.params;
+
+    const client =  new MongoClient("mongodb://127.0.0.1:27017");
+    await client.connect();
+
+    const db = client.db("react-blog-db") ;
+    await db.collection("articles").updateOne( { name }, {
+        $inc: { upvotes : 1 },
+    } )
+ 
+    const article = await db.collection("articles").findOne( { name } );
+
     if (article) {
-        article.upvotes += 1;
         res.send(`The ${name} article now has ${article.upvotes} upvote${article.upvotes === 1 ? "" : "s"}!`);
     } else {
         res.send("That article doesn't exist");
     }
 });
 
-app.post("/api/articles/:name/comments", (req, res) => {
+app.post("/api/articles/:name/comments", async (req, res) => {
     const { name } = req.params;
     const { postedBy, text } = req.body;
 
-    const article = articlesInfo.find(a => a.name === name);
+    const client =  new MongoClient("mongodb://127.0.0.1:27017");
+    await client.connect();
+
+    const db = client.db("react-blog-db") ;
+    await db.collection("articles").updateOne( { name }, {
+        $push: { comments: { postedBy, text } },
+    } );
+
+    const article = await db.collection("articles").findOne({ name });
 
     if (article) {
-        article.comments.push({postedBy, text});
         res.send(article.comments);
     } else { 
         res.send("That article doesn't exist");
