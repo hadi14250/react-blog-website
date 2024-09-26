@@ -1,8 +1,30 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 const LoginPage = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+     
     return (
-        <h1>
-            Log In
-        </h1>
+        <>
+        <h1>Log In</h1>
+
+        {error && <p className="error">{error}</p>}
+
+        <input
+        placeholder="name@mail.com"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        />
+        <input
+        placeholder="Your password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        type="password" />
+        <button>Login</button>
+        <Link to="create-account">Don't have an account? Create one here</Link>
+        </>
     );
 }
 
