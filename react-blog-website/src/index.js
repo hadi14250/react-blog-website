@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { initializeApp } from "firebase/app";
 
+// these are public ID's
 const firebaseConfig = {
   apiKey: "AIzaSyCbcZFlyaxk9HreOUPi8SOQun7CfgV9W-4",
   authDomain: "my-react-blog-38120.firebaseapp.com",
