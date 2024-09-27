@@ -20,9 +20,7 @@ const NavBar = () => {
             </ul>
             <div className='nav-right'>
                 {
-                    user 
-                        ? <button onClick={() => {signOut(getAuth())}}>Log Out</button>
-                        : <button onClick={() => { navigate(/login) }}>Log In</button>
+                    user ? <button onClick={() => {signOut(getAuth())}}>Log Out</button> : <button onClick={() => { navigate("/login") }}>Log In</button>
                 }
             </div>
         </nav>
