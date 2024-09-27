@@ -20,10 +20,10 @@ app.use( async (req, res, next) => {
         try {
             req.user = await admin.auth().verifyIdToken(authtoken);
         } catch (e) {
-             res.sendStatus(400);
+             return (res.sendStatus(400)); // here we return so we stop the function ffrom continuig down (important!!)
         }
     }
-
+    req.user = req.user || {};
     next();
 } );
 
