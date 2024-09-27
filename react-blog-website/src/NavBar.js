@@ -15,7 +15,6 @@ const NavBar = () => {
                 <li>
                     <Link to="/articles">Articles</Link>
                 </li>
-            </ul>
             <div className='nav-right'>
                 {
                     user 
@@ -23,6 +22,7 @@ const NavBar = () => {
                         : <button>Log In</button>
                 }
             </div>
+            </ul>
         </nav>
     );
 }
