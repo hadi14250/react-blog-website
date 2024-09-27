@@ -17,19 +17,6 @@ h3, h4 {
   margin-bottom: 0;
 }
 
-.nav-menu {
-  display: flex;
-  justify-content: space-between;
-  list-style-type: none;
-  padding: 1vmin;
-  margin: 0;
-}
-
-.nav-right {
-  display: inline-flex;
-  margin-right: 2vmin;
-}
-
 nav {
   border-bottom: 4px solid black;
   text-align: center;
@@ -112,4 +99,17 @@ nav a:hover {
 .comment {
   border-bottom: 2px solid black;
   padding: 16px;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 1vmin;
+  margin: 0;
+}
+
+.nav-right {
+  display: inline-flex;
+  margin-right: 2vmin;
 }
