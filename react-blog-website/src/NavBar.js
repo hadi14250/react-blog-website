@@ -6,7 +6,8 @@ const NavBar = () => {
     const { user } = useUser();
     const navigate = useNavigate();
     return (
-        <nav>
+        <nav class="nav-menu">
+           <img src="logo192.png" alt="Logo"  height={50}/>
             <ul>
                 <li>
                     <Link to="/">Home</Link>
@@ -17,12 +18,12 @@ const NavBar = () => {
                 <li>
                     <Link to="/articles">Articles</Link>
                 </li>
-            </ul>
-            <div className='nav-right'>
-                {
-                    user ? <button onClick={() => {signOut(getAuth())}}>Log Out</button> : <button onClick={() => { navigate("/login") }}>Log In</button>
-                }
-            </div>
+                    </ul>
+                <div className='nav-right'>
+                    {
+                        user ? <button onClick={() => {signOut(getAuth())}}>Log Out</button> : <button onClick={() => { navigate("/login") }}>Log In</button>
+                    }
+                </div>
         </nav>
     );
 }
