@@ -23,8 +23,10 @@ const ArticlePage = () => {
             setArticleInfo(newArticleInfo);
         }
 
-        loadArticleInfo();
-    }, []);
+        if (isLoading) {
+            loadArticleInfo();
+        }
+    }, [isLoading, user]);
 
     const article = articles.find(article => article.name === articleId);
 
