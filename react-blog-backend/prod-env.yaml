@@ -1,0 +1,4 @@
+env_variables:
+  MONGO_USERNAME: user-name
+  MONGO_PASSWORD: pass-word
+
